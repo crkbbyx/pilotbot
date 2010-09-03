@@ -81,14 +81,14 @@ void Driver(int caution, int courage, int patience)
 	if(Pitch == Backward && Attitude[0] > caution || Attitude[1] > caution-5 || ((Attitude[0] + Attitude[1]) / 2) > caution && Pitch == Backward)   // Checks for maximum roll and pitch
 	{
 		int lastRoll   = Roll;
-	// while(leftSpeed > 0 && rightSpeed > 0)  // ramp down to stop
-	// {
-	//   leftSpeed  = leftSpeed - 20;
-	//   rightSpeed = rightSpeed - 20;
-	//   Drive(10, Forward, rightSpeed, leftSpeed);
-	//   delay(20);
-	// }
-	//Stop();
+// while(leftSpeed > 0 && rightSpeed > 0)  // ramp down to stop
+// {
+//   leftSpeed  = leftSpeed - 20;
+//   rightSpeed = rightSpeed - 20;
+//   Drive(10, Forward, rightSpeed, leftSpeed);
+//   delay(20);
+// }
+//Stop();
 		delay(100);    //wait for accelerometer to settle
 		getAttitude(); // check accelerometer again
 
@@ -101,7 +101,7 @@ void Driver(int caution, int courage, int patience)
 				Stop();
 				delay(300);
 			}
-	// Punch-It Routine----------------
+// Punch-It Routine----------------
 			if(Attitude[1] < 10 && punchIt == true)
 			{
 				analogWrite(6, 255);
@@ -114,38 +114,36 @@ void Driver(int caution, int courage, int patience)
 					Drive(10, Forward, 255,255);
 					delay(10);
 					getAttitude();
-					time        = time+20;
-					}		Stop();
-					punchIt     = false;
 				}
 
+				Stop();
+				punchIt = false;
+			}
 
-				else if(Pitch == Backward)
+
+			else if(Pitch == Backward)
+			{
+				punchIt = true;
+				if(lastRoll == Left && courage > 5)
 				{
-					punchIt     = true;
-					if(lastRoll == Left && courage > 5)
-					{
-						Rotate(patience*2, Left, leftSpeed);
-					}
-					if (lastRoll == Left && courage <= 5)
-					{
-						Rotate(patience*2, Right, leftSpeed);
-					}
-					else if (lastRoll == Right && courage > 5)
-					{
-						Rotate(patience*2, Right, leftSpeed);
-					}
-					else if (lastRoll == Right && courage <= 5)
-					{
-						Rotate(patience*2, Left, leftSpeed);
-					}
+					Rotate(patience*2, Left, leftSpeed);
+				}
+				if (lastRoll == Left && courage <= 5)
+				{
+					Rotate(patience*2, Right, leftSpeed);
+				}
+				else if (lastRoll == Right && courage > 5)
+				{
+					Rotate(patience*2, Right, leftSpeed);
+				}
+				else if (lastRoll == Right && courage <= 5)
+				{
+					Rotate(patience*2, Left, leftSpeed);
 				}
 			}
 		}
-
-
-
 	}
+}
 
 
 
