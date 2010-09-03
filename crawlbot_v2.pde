@@ -1,22 +1,25 @@
 // CrawlBot V2
 
 // --------- VARIABLES ----------
-const boolean Left = 1;
-const boolean Right = 0;
-const boolean Forward = 1;
-const boolean Backward = 0;
-const byte xPin = 0;
-const byte yPin = 4;
-const byte zPin = 5;
-const byte xAxis = 0;
-const byte yAxis = 1;
-const byte zAxis = 2;
-const byte virtue1Pin = 1;
-const byte virtue2Pin = 2;
-const byte virtue3Pin = 3;
+const boolean Left = 1;			// Indicates LEFT roll
+const boolean Right = 0;		// Indicater RIGHT roll
+const boolean Forward = 1;		// Indicates FORWARD pitch
+const boolean Backward = 0;		// Indicates BACKWARD pitch
+
+// Pin Assignment
+const byte xPin = 0;			// Accelerometer X-axis - Analog
+const byte yPin = 4;			// Accelerometer Y-axis - Analog
+const byte zPin = 5;			// Accelerometer Z-axis - Analog
+const byte xAxis = 0;			// Array Address of accelermeter data
+const byte yAxis = 1;			// Array Address of accelermeter data;
+const byte zAxis = 2;			// Array Address of accelermeter data
+const byte virtue1Pin = 1;		// Potentiometer 1 - Analog
+const byte virtue2Pin = 2;		// Potentiometer 2 - Analog;
+const byte virtue3Pin = 3;;		// Potentiometer 3 - Analog
 const byte Caution = 0;
 const byte Courage = 1;
 const byte Patience = 2;
+
 int Virtues[3];
 volatile int Attitude[3];
 volatile boolean Flipped;
