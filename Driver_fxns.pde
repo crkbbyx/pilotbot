@@ -4,6 +4,8 @@ void Driver(int caution, int courage, int patience)
 	int rightSpeed;
 	int lastTurn;
 	int thisTurn;
+
+// --- uphill -----------------------
 	if(Pitch == Backward)
 	{
 		if(Roll == Left && courage > 5)  // Slows down as vehicle rolls and pitches. Can turn into or away from roll.
@@ -12,6 +14,7 @@ void Driver(int caution, int courage, int patience)
 			rightSpeed    = (255 - (4*Attitude[0] + courage*Attitude[1]));// * (courage - 4) );
 			leftSpeed     = constrain(leftSpeed, 50, 255);
 			rightSpeed    = constrain(rightSpeed, 50, 255);
+
 		}
 		else if(Roll == Left && courage <= 5)
 		{
@@ -35,6 +38,7 @@ void Driver(int caution, int courage, int patience)
 			rightSpeed    = constrain(rightSpeed, 50, 255);
 		}
 	}
+
 	else
 	{
 		if(Roll == Left && courage > 5)  // Slows down as vehicle rolls and pitches. Can turn into or away from roll.
@@ -43,6 +47,7 @@ void Driver(int caution, int courage, int patience)
 			leftSpeed     = 2*(255 - (3*Attitude[0] + courage*Attitude[1]));// * (courage - 4) );
 			leftSpeed     = constrain(leftSpeed, 50, 255);
 			rightSpeed    = constrain(rightSpeed, 50, 255);
+
 		}
 		else if(Roll == Left && courage <= 5)
 		{
@@ -66,16 +71,30 @@ void Driver(int caution, int courage, int patience)
 			rightSpeed    = constrain(rightSpeed, 50, 255);
 		}	
 	}
+// --- end uphill -----------------------
+
+
 	Drive(100, Forward, rightSpeed, leftSpeed); // Drive forward... primary instruction
 	getAttitude();
+// --------------------
+
 	if(Pitch == Backward && Attitude[0] > caution || Attitude[1] > caution-5 || ((Attitude[0] + Attitude[1]) / 2) > caution && Pitch == Backward)   // Checks for maximum roll and pitch
 	{
 		int lastRoll   = Roll;
+	// while(leftSpeed > 0 && rightSpeed > 0)  // ramp down to stop
+	// {
+	//   leftSpeed  = leftSpeed - 20;
+	//   rightSpeed = rightSpeed - 20;
+	//   Drive(10, Forward, rightSpeed, leftSpeed);
+	//   delay(20);
+	// }
+	//Stop();
 		delay(100);    //wait for accelerometer to settle
 		getAttitude(); // check accelerometer again
 
 		if(Pitch == Backward && Attitude[0] > caution || Attitude[1] > caution-5 || ((Attitude[0] + Attitude[1]) / 2) > caution && Pitch == Backward) // Retest for max roll and pitch
 		{
+
 			if(Pitch == Backward)
 			{
 				Drive(((Attitude[0] + Attitude[1]) * 20), Backward, leftSpeed, rightSpeed);
@@ -96,33 +115,37 @@ void Driver(int caution, int courage, int patience)
 					delay(10);
 					getAttitude();
 					time        = time+20;
-					Stop();
+					}		Stop();
 					punchIt     = false;
 				}
-			}
-			else if(Pitch == Backward)
-			{
-				punchIt     = true;
-				if(lastRoll == Left && courage > 5)
+
+
+				else if(Pitch == Backward)
 				{
-					Rotate(patience*2, Left, leftSpeed);
-				}
-				if (lastRoll == Left && courage <= 5)
-				{
-					Rotate(patience*2, Right, leftSpeed);
-				}
-				else if (lastRoll == Right && courage > 5)
-				{
-					Rotate(patience*2, Right, leftSpeed);
-				}
-				else if (lastRoll == Right && courage <= 5)
-				{
-					Rotate(patience*2, Left, leftSpeed);
+					punchIt     = true;
+					if(lastRoll == Left && courage > 5)
+					{
+						Rotate(patience*2, Left, leftSpeed);
+					}
+					if (lastRoll == Left && courage <= 5)
+					{
+						Rotate(patience*2, Right, leftSpeed);
+					}
+					else if (lastRoll == Right && courage > 5)
+					{
+						Rotate(patience*2, Right, leftSpeed);
+					}
+					else if (lastRoll == Right && courage <= 5)
+					{
+						Rotate(patience*2, Left, leftSpeed);
+					}
 				}
 			}
 		}
+
+
+
 	}
-}
 
 
 
