@@ -16,7 +16,7 @@ const byte zAxis = 2;			// Array Address of accelermeter data
 const byte virtue1Pin = 1;		// Potentiometer 1 - Analog
 const byte virtue2Pin = 2;		// Potentiometer 2 - Analog;
 const byte virtue3Pin = 3;;		// Potentiometer 3 - Analog
-const byte Caution = 0;
+const byte Caution = 0;			// 
 const byte Courage = 1;
 const byte Patience = 2;
 
