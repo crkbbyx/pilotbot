@@ -50,8 +50,8 @@ void setup()
 {
 	CalibratePitch = analogRead(PitchPin);	// Measures pitch at startup, assumed to be level 
 	CalibrateRoll = analogRead(RollPin);	// Measures roll at startup, assumed to be level
-	CalibrateZ = analogRead(ZPin);		// Measures Z-axis at startup, assumed to be gravity
-	attachInterrupt(0, go, RISING);		// Attaches fxn "go" to the Go Button on pin 0
+	CalibrateZ = analogRead(ZPin);			// Measures Z-axis at startup, assumed to be gravity
+	attachInterrupt(0, go, RISING);			// Attaches fxn "go" to the Go Button on pin 0
 }
 
 void loop()
