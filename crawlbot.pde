@@ -1,5 +1,3 @@
-// CrawlBot V2
-
 // --------- VARIABLES ----------
 const boolean Left = 1;			// Indicates LEFT roll
 const boolean Right = 0;		// Indicater RIGHT roll
@@ -58,6 +56,8 @@ void loop()
 { 
 	while(Flipped == true)
 	{
+		Stop();
+		
 		redVal = analogRead(1);
 		greenVal = analogRead(2);
 		blueVal = analogRead(3);
@@ -67,13 +67,13 @@ void loop()
 		analogWrite(6, redVal);
 		analogWrite(5, greenVal);
 		analogWrite(3, blueVal);
+		
 		cautionVal = map(analogRead(1), 0, 1024, 10, 35);
 		patienceVal = map(analogRead(2), 0, 1024, 100, 800);
 		courageVal = map(analogRead(3), 0, 1024, 11, 1);
 		punchIt = true;
-		int tappedz = analogRead(5);
-
-		if(tappedz > 400)
+		
+		if(analogRead(5) > 400)
 		{
 			Flipped = false;
 		}
@@ -82,13 +82,11 @@ void loop()
 	while(Flipped == false)
 	{
 		getAttitude();
-		Driver(cautionVal, courageVal, patienceVal);
-		analogWrite(6, 0);
-		analogWrite(5, 0);
-		analogWrite(3, 0);
+		p1();
+		p2();
+		p3();
+		Drive()
 	}
-
-	Stop();
 }
 
 void go()
