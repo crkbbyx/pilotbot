@@ -19,26 +19,26 @@ const byte Virtue3Pin = 3;	// Analog pin reads right pot
 
 // Pin Mapping - LED
 const byte RedPin = 6;		// Pwm output for the red LED channel
-const byte GreenPin = 5;		// Pwm output for the green LED channel
+const byte GreenPin = 5;	// Pwm output for the green LED channel
 const byte BluePin = 3;		// Pwm output for the blue LED channel
 
 // State Variables
-byte Pitch = 0;				// Abstraction for Pitch array address
-byte Roll = 1;				// Abstraction for Roll array address
-byte Zaxis = 2;				// Abstraction for Z-axis array address
-byte Virtue1 = 0;			// Abstraction for Virtue 1 array address
-byte Virtue2 = 1;			// Abstraction for Virtue 2 array address
-byte Virtue3 = 2;			// Abstraction for Virtue 3 array address
+byte Pitch = 0;			// Abstraction for Pitch array address
+byte Roll = 1;			// Abstraction for Roll array address
+byte Zaxis = 2;			// Abstraction for Z-axis array address
+byte Virtue1 = 0;		// Abstraction for Virtue 1 array address
+byte Virtue2 = 1;		// Abstraction for Virtue 2 array address
+byte Virtue3 = 2;		// Abstraction for Virtue 3 array address
 boolean Flipped = true;		// Toggles betwen two main loops, the Drive loop and the Tune loop
-int Attitude[3];			// Array that holds the X,Y, and Z readings processed by the getAttitude fxn
-int Virtues[3];				// Array that holds the 3 pot values
-int CalibratePitch;			// Level value for pitch, set when powered on
-int CalibrateRoll;			// Level value for roll, set when powered on
-int CalibrateZ;				// Level value for Z-axis, set when powered on
+int Attitude[3];		// Array that holds the X,Y, and Z readings processed by the getAttitude fxn
+int Virtues[3];			// Array that holds the 3 pot values
+int CalibratePitch;		// Level value for pitch, set when powered on
+int CalibrateRoll;		// Level value for roll, set when powered on
+int CalibrateZ;			// Level value for Z-axis, set when powered on
 
 //Drive Variables
-const boolean fwd = 1;				// Abstraction for forward
-const boolean bwd = 0;				// Abstraction for backward
+const boolean fwd = 1;		// Abstraction for forward
+const boolean bwd = 0;		// Abstraction for backward
 int LeftSpeed = 255;		// Speed for left wheels, starts at maximum
 boolean Leftdirection = fwd;	// Direction for left wheels, starts at forward
 int RightSpeed = 255;		// Speed for right wheels, starts at maximum
@@ -50,8 +50,8 @@ void setup()
 {
 	CalibratePitch = analogRead(PitchPin);	// Measures pitch at startup, assumed to be level 
 	CalibrateRoll = analogRead(RollPin);	// Measures roll at startup, assumed to be level
-	CalibrateZ = analogRead(ZPin);			// Measures Z-axis at startup, assumed to be gravity
-	attachInterrupt(0, go, RISING);			// Attaches fxn "go" to the Go Button on pin 0
+	CalibrateZ = analogRead(ZPin);		// Measures Z-axis at startup, assumed to be gravity
+	attachInterrupt(0, go, RISING);		// Attaches fxn "go" to the Go Button on pin 0
 }
 
 void loop()
