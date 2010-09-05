@@ -28,7 +28,12 @@ int Attitude[3];			// Array that holds the X,Y, and Z readings processed by the 
 int Virtues[3];				// Array that holds the 3 pot values
 
 //Drive Variables
-
+bool fwd = 1;				// Abstraction for forward
+bool bwd = 0;				// Abstraction for backward
+int LeftSpeed = 255;		// Speed for left wheels, starts at maximum
+bool Leftdirection = fwd;	// Direction for left wheels, starts at forward
+int RightSpeed = 255;		// Speed for right wheels, starts at maximum
+bool RightDirection = fwd;	// Direction for right wheels, starts at forward
 
 void setup()
 {
