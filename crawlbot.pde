@@ -29,7 +29,7 @@ byte Zaxis = 2;				// Abstraction for Z-axis array address
 byte Virtue1 = 0;			// Abstraction for Virtue 1 array address
 byte Virtue2 = 1;			// Abstraction for Virtue 2 array address
 byte Virtue3 = 2;			// Abstraction for Virtue 3 array address
-bool Flipped = true;		// Toggles betwen two main loops, the Drive loop and the Tune loop
+boolean Flipped = true;		// Toggles betwen two main loops, the Drive loop and the Tune loop
 int Attitude[3];			// Array that holds the X,Y, and Z readings processed by the getAttitude fxn
 int Virtues[3];				// Array that holds the 3 pot values
 int CalibratePitch;			// Level value for pitch, set when powered on
@@ -37,12 +37,12 @@ int CalibrateRoll;			// Level value for roll, set when powered on
 int CalibrateZ;				// Level value for Z-axis, set when powered on
 
 //Drive Variables
-bool fwd = 1;				// Abstraction for forward
-bool bwd = 0;				// Abstraction for backward
+const boolean fwd = 1;				// Abstraction for forward
+const boolean bwd = 0;				// Abstraction for backward
 int LeftSpeed = 255;		// Speed for left wheels, starts at maximum
-bool Leftdirection = fwd;	// Direction for left wheels, starts at forward
+boolean Leftdirection = fwd;	// Direction for left wheels, starts at forward
 int RightSpeed = 255;		// Speed for right wheels, starts at maximum
-bool RightDirection = fwd;	// Direction for right wheels, starts at forward
+boolean RightDirection = fwd;	// Direction for right wheels, starts at forward
 int DriveDelay = 10;		// Time in microseconds to carry out drive fxn, starts at 10us
 
 
