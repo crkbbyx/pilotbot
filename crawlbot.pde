@@ -48,56 +48,56 @@ int DriveDelay = 10;            // Time in microseconds to carry out drive fxn, 
 
 void setup()
 {
-    CalibratePitch = analogRead(PitchPin);  // Measures pitch at startup, assumed to be level 
-    CalibrateRoll = analogRead(RollPin);    // Measures roll at startup, assumed to be level
-    CalibrateZ = analogRead(ZPin);          // Measures Z-axis at startup, assumed to be gravity
-    attachInterrupt(0, go, RISING);         // Attaches fxn "go" to the Go Button on pin 0
+	CalibratePitch = analogRead(PitchPin);  // Measures pitch at startup, assumed to be level 
+	CalibrateRoll = analogRead(RollPin);    // Measures roll at startup, assumed to be level
+	CalibrateZ = analogRead(ZPin);          // Measures Z-axis at startup, assumed to be gravity
+	attachInterrupt(0, go, RISING);         // Attaches fxn "go" to the Go Button on pin 0
 }
 
 void loop()
 { 
-    // Tuning Loop.
-    // While Flipped is true, it stops the motors and scans Virtue1, Virtue2, and Virtue3 pots for values.
-    // Also outputs tuning values to the RGB LED.  
-    while(Flipped == true)
-    {
-        //Stop();                                                       // Stops the motors
-        analogWrite(RedPin, map(analogRead(Virtue1), 0,1024,0,255));    // Reads, maps, and writes Virtue1 to the red LED
-        analogWrite(GreenPin, map(analogRead(Virtue2), 0,1024,0,255));  // Reads, maps, and writes Virtue2 to the green LED
-        analogWrite(BluePin, map(analogRead(Virtue3), 0,1024,0,255));   // Reads, maps, and writes Virtue3 to the blue LED
+	// Tuning Loop.
+	// While Flipped is true, it stops the motors and scans Virtue1, Virtue2, and Virtue3 pots for values.
+	// Also outputs tuning values to the RGB LED.  
+	while(Flipped == true)
+	{
+		//Stop();                                                       // Stops the motors
+		analogWrite(RedPin, map(analogRead(Virtue1), 0,1024,0,255));    // Reads, maps, and writes Virtue1 to the red LED
+		analogWrite(GreenPin, map(analogRead(Virtue2), 0,1024,0,255));  // Reads, maps, and writes Virtue2 to the green LED
+		analogWrite(BluePin, map(analogRead(Virtue3), 0,1024,0,255));   // Reads, maps, and writes Virtue3 to the blue LED
 
-        if(analogRead(ZPin) > 400)                                      // Checks to see if Go Tap received 
-        {
-            Flipped = false;                                            // If received, exits Tuning Loop
-        }
-    }
+		if(analogRead(ZPin) > 400)                                      // Checks to see if Go Tap received 
+		{
+			Flipped = false;                                            // If received, exits Tuning Loop
+		}
+	}
 
-    // Drive Loop.
-    // While Flipped is false, executes Drive fxn and Virtue fxns.
-    while(Flipped == false)
-    {
-        getAttitude();
-        p1();
-        p2();
-        p3();
-        Drive();
-    }
+	// Drive Loop.
+	// While Flipped is false, executes Drive fxn and Virtue fxns.
+	while(Flipped == false)
+	{
+		getAttitude();
+		p1();
+		p2();
+		p3();
+		Drive();
+	}
 }
 
 void go()
 {
-    static unsigned long last_interrupt_time = 0;
-    unsigned long interrupt_time = millis();
-    // If interrupts come faster than 200ms, assume it's a bounce and ignore
-    if (interrupt_time - last_interrupt_time > 200)
-    {
-        if (Flipped == false)
-        {
-            //Stop(); 
-        }
-        Flipped = !Flipped;
-    }
-    last_interrupt_time = interrupt_time;
+	static unsigned long last_interrupt_time = 0;
+	unsigned long interrupt_time = millis();
+	// If interrupts come faster than 200ms, assume it's a bounce and ignore
+	if (interrupt_time - last_interrupt_time > 200)
+	{
+		if (Flipped == false)
+		{
+			//Stop(); 
+		}
+		Flipped = !Flipped;
+	}
+	last_interrupt_time = interrupt_time;
 }
 
 
