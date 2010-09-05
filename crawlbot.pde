@@ -1,37 +1,34 @@
-// --------- VARIABLES ----------
-const boolean Left = 1;			// Indicates LEFT roll
-const boolean Right = 0;		// Indicater RIGHT roll
-const boolean Forward = 1;		// Indicates FORWARD pitch
-const boolean Backward = 0;		// Indicates BACKWARD pitch
+// Pin Mapping - TB1244FNG motor driver
+const PwmA = 9;				// Right speed pwm signal
+const PwmB = 10;			// Left speed pwm signal
+const Ain1 = 7;				// H-bridge logic for right side
+const Ain2 = 8;				// H-bridge logic for right side
+const Bin1 = 1;				// H-bridge logic for left side3
+const Bin2 = 12;			// H-bridge logic for left side
+const Stby = 4;				// Turns motor driver on or off, HIGH is on
 
-// Pin Assignment
-const byte xPin = 0;			// Accelerometer X-axis - Analog
-const byte yPin = 4;			// Accelerometer Y-axis - Analog
-const byte zPin = 5;			// Accelerometer Z-axis - Analog
-const byte xAxis = 0;			// Array Address of accelermeter data
-const byte yAxis = 1;			// Array Address of accelermeter data;
-const byte zAxis = 2;			// Array Address of accelermeter data
-const byte virtue1Pin = 1;		// Potentiometer 1 - Analog
-const byte virtue2Pin = 2;		// Potentiometer 2 - Analog;
-const byte virtue3Pin = 3;;		// Potentiometer 3 - Analog
-const byte Caution = 0;			// 
-const byte Courage = 1;
-const byte Patience = 2;
+// Pin Mapping - accelerometer
+const Xaxis = 0;			// Analog pin reads pitch
+const Yaxis = 4;			// Analog pin reads roll
+const Zaxis = 5;			// Analog pin reads Z axis (up and down)
 
-int Virtues[3];
-volatile int Attitude[3];
-volatile boolean Flipped;
-byte Roll;
-byte Pitch;
-int xCal;
-int yCal;
-int cautionVal;
-int courageVal;
-int patienceVal;
-volatile boolean punchIt;
-int redVal;
-int greenVal;
-int blueVal;
+// Pin Mapping  - potentiometers
+const Virtue1 = 1;			// Analog pin reads left pot
+const Virtue2 = 2;			// Analog pin reads center pot
+const Virtue3 = 3;			// Analog pin reads right pot
+
+// Pin Mapping - LED
+const RedLED = 6;			// Pwm output for the red LED channel
+const GreenLED = 5;			// Pwm output for the green LED channel
+const BlueLED = 3;			// Pwm output for the blue LED channel
+
+// State Variables
+bool Flipped = true;		// Toggles betwen two main loops, the Drive loop and the Tune loop
+int Attitude[3];			// Array that holds the X,Y, and Z readings processed by the getAttitude fxn
+int Virtues[3];				// Array that holds the 3 pot values
+
+//Drive Variables
+
 
 void setup()
 {

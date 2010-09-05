@@ -1,31 +1,31 @@
 // ---------- DRIVE FXN ----------
 
-void Drive(int distance, boolean driveDirection, int leftSpeed, int rightSpeed)
+void Drive(int delay, boolean driveDirection, int leftSpeed, int rightSpeed)
 {
-	digitalWrite(4, HIGH);
+	digitalWrite(Stby, HIGH);
 	switch (driveDirection)
 	{
 		case Forward:
-		digitalWrite(8, LOW);
-		digitalWrite(7, HIGH);
+		digitalWrite(Ain2, LOW);
+		digitalWrite(Ain1, HIGH);
 
-		digitalWrite(13, LOW);
-		digitalWrite(12, HIGH);
+		digitalWrite(Bin1, LOW);
+		digitalWrite(Bin2, HIGH);
 
-		analogWrite(9, rightSpeed);
-		analogWrite(10, leftSpeed);
+		analogWrite(PwmA, rightSpeed);
+		analogWrite(PwmB, leftSpeed);
 		delay(distance);
 		break;
 
 		case Backward:
-		digitalWrite(8, HIGH);
-		digitalWrite(7, LOW);
+		digitalWrite(Ain2, HIGH);
+		digitalWrite(Ain1, LOW);
 
-		digitalWrite(13, HIGH);
-		digitalWrite(12, LOW);
+		digitalWrite(Bin1, HIGH);
+		digitalWrite(Bin2, LOW);
 
-		analogWrite(9, rightSpeed);
-		analogWrite(10, leftSpeed);
+		analogWrite(PwmA, rightSpeed);
+		analogWrite(PwmB, leftSpeed);
 		delay(distance);
 		break;
 	}
@@ -36,30 +36,30 @@ void Drive(int distance, boolean driveDirection, int leftSpeed, int rightSpeed)
 
 void Rotate(int rotateAngle, boolean turnDirection, int turnSpeed)
 {
-	digitalWrite(4, HIGH);
+	digitalWrite(Stby, HIGH);
 	switch (turnDirection)
 	{
 		case Left:
-		digitalWrite(8, LOW);
-		digitalWrite(7, HIGH);
+		digitalWrite(Ain1, LOW);
+		digitalWrite(Ain1, HIGH);
 
-		digitalWrite(13, HIGH);
-		digitalWrite(12, LOW);
+		digitalWrite(Bin1, HIGH);
+		digitalWrite(Bin2, LOW);
 
-		analogWrite(9, turnSpeed);
-		analogWrite(10, turnSpeed);
+		analogWrite(PwmA, turnSpeed);
+		analogWrite(PwmB, turnSpeed);
 		delay(rotateAngle);
 		break;
 
 		case Right:
-		digitalWrite(8, HIGH);
-		digitalWrite(7, LOW);
+		digitalWrite(Ain1, HIGH);
+		digitalWrite(Ain1, LOW);
 
-		digitalWrite(13, LOW);
-		digitalWrite(12, HIGH);
+		digitalWrite(Bin1, LOW);
+		digitalWrite(Bin2, HIGH);
 
-		analogWrite(9, turnSpeed);
-		analogWrite(10, turnSpeed);
+		analogWrite(PwmA, turnSpeed);
+		analogWrite(PwmB, turnSpeed);
 		delay(rotateAngle);
 		break;
 	}
@@ -69,16 +69,16 @@ void Rotate(int rotateAngle, boolean turnDirection, int turnSpeed)
 // ---------- STOP FXN ----------
 void Stop()
 {
-	digitalWrite(8, LOW);
-	digitalWrite(7, LOW);
+	digitalWrite(Ain1, LOW);
+	digitalWrite(Ain1, LOW);
 
-	digitalWrite(13, LOW);
-	digitalWrite(12, LOW);
+	digitalWrite(Bin1, LOW);
+	digitalWrite(Bin2, LOW);
 
-	analogWrite(9, 0);
-	analogWrite(10, 0);
+	analogWrite(PwmA, 0);
+	analogWrite(PwmB, 0);
 
-	digitalWrite(4, LOW);
+	digitalWrite(Stby, LOW);
 }
 
 // ---------- GETATTITUDE FXN ----------
