@@ -76,7 +76,6 @@ void loop()
 		analogWrite(RedPin, map(analogRead(Virtue1Pin), 1024,0,0,255));    // Reads, maps, and writes Virtue1 to the red LED
 		analogWrite(GreenPin, map(analogRead(Virtue2Pin), 1024,0,0,255));  // Reads, maps, and writes Virtue2 to the green LED
 		analogWrite(BluePin, map(analogRead(Virtue3Pin), 1024,0,0,255));   // Reads, maps, and writes Virtue3 to the blue LED
-
 		if(analogRead(ZPin) > 400)                                   	   // Checks to see if Go Tap received 
 		{
 			Flipped = false;                                         	   // If received, exits Tuning Loop
@@ -107,5 +106,3 @@ void go()
 	}
 	last_interrupt_time = interrupt_time;				// Debounce code
 }
-
-
