@@ -77,9 +77,9 @@ void loop()
 	while(Flipped == false)
 	{
 		getAttitude();
-		p1();
-		p2();
-		p3();
+		// V1();
+		// V2();
+		// V3();
 		Drive();
 	}
 }
