@@ -35,7 +35,8 @@ int blueVal;
 void setup()
 {
 	// Serial.begin(9600);
-	pinMode(2, OUTPUT);
+	pinMode(2, INPUT);
+	digitalWrite(2, HIGH);
 	pinMode(4, OUTPUT);
 	pinMode(5, OUTPUT);
 	pinMode(6, OUTPUT);
@@ -46,7 +47,7 @@ void setup()
 	punchIt = true;
 	xCal = analogRead(xPin);	// Calibrates x-axis 
 	yCal = analogRead(yPin);
-	attachInterrupt(0, go, RISING);
+	attachInterrupt(0, go, FALLING);
 }
 
 
