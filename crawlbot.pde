@@ -3,7 +3,7 @@ const byte PwmA = 9;            // Right speed pwm signal
 const byte PwmB = 10;           // Left speed pwm signal
 const byte Ain1 = 7;            // H-bridge logic for right side
 const byte Ain2 = 8;            // H-bridge logic for right side
-const byte Bin1 = 13;            // H-bridge logic for left side3
+const byte Bin1 = 13;           // H-bridge logic for left side3
 const byte Bin2 = 12;           // H-bridge logic for left side
 const byte Stby = 4;            // Turns motor driver on or off, HIGH is on
 
@@ -24,12 +24,12 @@ const byte GreenPin = 5;        // Pwm output for the green LED channel
 const byte BluePin = 3;         // Pwm output for the blue LED channel
 
 // State Variables
-byte Pitch = 0;                 // Abstraction for Pitch array address
-byte Roll = 1;                  // Abstraction for Roll array address
-byte Zaxis = 2;                 // Abstraction for Z-axis array address
-byte Virtue1 = 0;               // Abstraction for Virtue 1 array address
-byte Virtue2 = 1;               // Abstraction for Virtue 2 array address
-byte Virtue3 = 2;               // Abstraction for Virtue 3 array address
+const byte Pitch = 0;           // Abstraction for Pitch array address
+const byte Roll = 1;            // Abstraction for Roll array address
+const byte Zaxis = 2;           // Abstraction for Z-axis array address
+const byte Virtue1 = 0;         // Abstraction for Virtue 1 array address
+const byte Virtue2 = 1;         // Abstraction for Virtue 2 array address
+const byte Virtue3 = 2;         // Abstraction for Virtue 3 array address
 volatile boolean Flipped = true;// Toggles between the Drive loop and the Tune loop. Volatile due to use with interrupt
 int Attitude[3];                // Array that holds the X,Y, and Z readings processed by the getAttitude fxn
 int Virtues[3];                 // Array that holds the 3 pot values
@@ -41,9 +41,9 @@ int CalibrateZ;                 // Level value for Z-axis, set when powered on
 const boolean fwd = 1;          // Abstraction for forward
 const boolean bwd = 0;          // Abstraction for backward
 int LeftSpeed = 255;            // Speed for left wheels, starts at maximum
-boolean LeftDirection;    // Direction for left wheels, starts at forward
+boolean LeftDirection;          // Direction for left wheels, starts at forward
 int RightSpeed = 255;           // Speed for right wheels, starts at maximum
-boolean RightDirection;   // Direction for right wheels, starts at forward
+boolean RightDirection;         // Direction for right wheels, starts at forward
 int DriveDelay = 10;            // Time in microseconds to carry out drive fxn, starts at 10us
 
 
@@ -64,7 +64,7 @@ void setup()
 	CalibratePitch = analogRead(PitchPin);  // Measures pitch at startup, assumed to be level 
 	CalibrateRoll = analogRead(RollPin);    // Measures roll at startup, assumed to be level
 	CalibrateZ = analogRead(ZPin);          // Measures Z-axis at startup, assumed to be gravity
-	attachInterrupt(0, go, FALLING);        // Attaches fxn "go" to the Go Button on pin 0
+	attachInterrupt(0, go, FALLING);        // Attaches fxn "go" to the Go Button on pin 2
 }
 
 void loop()
