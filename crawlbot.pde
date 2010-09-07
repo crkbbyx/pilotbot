@@ -3,7 +3,7 @@ const byte PwmA = 9;            // Right speed pwm signal
 const byte PwmB = 10;           // Left speed pwm signal
 const byte Ain1 = 7;            // H-bridge logic for right side
 const byte Ain2 = 8;            // H-bridge logic for right side
-const byte Bin1 = 1;            // H-bridge logic for left side3
+const byte Bin1 = 13;            // H-bridge logic for left side3
 const byte Bin2 = 12;           // H-bridge logic for left side
 const byte Stby = 4;            // Turns motor driver on or off, HIGH is on
 
@@ -41,9 +41,9 @@ int CalibrateZ;                 // Level value for Z-axis, set when powered on
 const boolean fwd = 1;          // Abstraction for forward
 const boolean bwd = 0;          // Abstraction for backward
 int LeftSpeed = 255;            // Speed for left wheels, starts at maximum
-boolean Leftdirection = fwd;    // Direction for left wheels, starts at forward
+boolean Leftdirection;    // Direction for left wheels, starts at forward
 int RightSpeed = 255;           // Speed for right wheels, starts at maximum
-boolean RightDirection = fwd;   // Direction for right wheels, starts at forward
+boolean RightDirection;   // Direction for right wheels, starts at forward
 int DriveDelay = 10;            // Time in microseconds to carry out drive fxn, starts at 10us
 
 
@@ -87,7 +87,14 @@ void loop()
 // While Flipped is false, executes Drive fxn and Virtue fxns.
 	while(Flipped == false)
 	{
-		Drive(500, fwd, 255, 255);
+		Drive(500, 100, fwd, 100, fwd);
+		Drive(500, 100, bwd, 100, bwd);
+		Drive(1000, 100, fwd, 100, bwd);
+		Drive(500, 100, bwd, 100, fwd);
+		Stop();
+		delay(2000);
+		// Drive(500, 255, bwd, 255, bwd);
+		// Drive(1000, 255, fwd, 255, bwd);
 	}
 }
 
