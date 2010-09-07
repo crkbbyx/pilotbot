@@ -61,3 +61,11 @@ void Stop()
 
     digitalWrite(Stby, LOW);                                // Turns off motor driver
 }
+
+void GetAttitude()
+{
+
+    Attitude[Pitch] = analogRead(PitchPin);
+    Attitude[Roll] = analogRead(RollPin);
+    Attitude[Zaxis] = analogRead(ZPin);
+}
