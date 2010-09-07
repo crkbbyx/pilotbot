@@ -74,12 +74,15 @@ void loop()
 // Also outputs tuning values to the RGB LED.  
     while(Flipped == true)
     {
-        analogWrite(RedPin, map(analogRead(Virtue1Pin), 1024,0,0,255));    // Reads, maps, and writes Virtue1 to the red LED
-        analogWrite(GreenPin, map(analogRead(Virtue2Pin), 1024,0,0,255));  // Reads, maps, and writes Virtue2 to the green LED
-        analogWrite(BluePin, map(analogRead(Virtue3Pin), 1024,0,0,255));   // Reads, maps, and writes Virtue3 to the blue LED
-        if(analogRead(ZPin) > 400)                                         // Checks to see if Go Tap received 
+        analogWrite(RedPin, map(analogRead(Virtue1Pin), 1024,0,0,255));     // Reads, maps, and writes Virtue1 to the red LED
+        analogWrite(GreenPin, map(analogRead(Virtue2Pin), 1024,0,0,255));   // Reads, maps, and writes Virtue2 to the green LED
+        analogWrite(BluePin, map(analogRead(Virtue3Pin), 1024,0,0,255));    // Reads, maps, and writes Virtue3 to the blue LED
+        Virtues[Virtue1] = map(analogRead(Virtue1Pin), 1024,0,0,1024);      // Writes pot to array.Inverts so left
+        Virtues[Virtue2] = map(analogRead(Virtue2Pin), 1024,0,0,1024);      // Writes pot to array.Inverts so left
+        Virtues[Virtue3] = map(analogRead(Virtue3Pin), 1024,0,0,1024);      // Writes pot to array.Inverts so left
+        if(analogRead(ZPin) > 400)                                          // Checks to see if Go Tap received 
         {
-            Flipped = false;                                               // If received, exits Tuning Loop
+            Flipped = false;                                                // If received, exits Tuning Loop
         }
     }
 
