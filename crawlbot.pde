@@ -41,9 +41,9 @@ volatile boolean Flipped = true;// Toggles between the Drive loop and the Tune l
 const boolean fwd = 1;          // Abstraction for forward
 const boolean bwd = 0;          // Abstraction for backward
 int LeftSpeed = 255;            // Speed for left wheels, starts at maximum
-boolean LeftDirection;          // Direction for left wheels, starts at forward
+boolean LeftDirection = fwd;          // Direction for left wheels, starts at forward
 int RightSpeed = 255;           // Speed for right wheels, starts at maximum
-boolean RightDirection;         // Direction for right wheels, starts at forward
+boolean RightDirection = fwd;         // Direction for right wheels, starts at forward
 int DriveDelay = 10;            // Time in microseconds to carry out drive fxn, starts at 10us
 
 
@@ -81,6 +81,7 @@ void loop()
         Virtues[Virtue1] = map(analogRead(Virtue1Pin), 1024,0,0,1024);      // Writes pot to array.Inverts so left
         Virtues[Virtue2] = map(analogRead(Virtue2Pin), 1024,0,0,1024);      // Writes pot to array.Inverts so left
         Virtues[Virtue3] = map(analogRead(Virtue3Pin), 1024,0,0,1024);      // Writes pot to array.Inverts so left
+        
         if(analogRead(ZPin) > 400)                                          // Checks to see if Go Tap received 
         {
             Flipped = false;                                                // If received, exits Tuning Loop
@@ -93,6 +94,7 @@ void loop()
     {
         GetAttitude();
         Drive(DriveDelay, LeftSpeed, LeftDirection, RightSpeed, RightDirection);
+        P1();
     }
 }
 
