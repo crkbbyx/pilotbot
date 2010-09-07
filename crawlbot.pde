@@ -49,7 +49,7 @@ int DriveDelay = 10;            // Time in microseconds to carry out drive fxn, 
 
 void setup()
 {
-    Serial.begin(9600);
+    //Serial.begin(9600);
     pinMode(GoButton, INPUT);
     digitalWrite(GoButton, HIGH);           // Enable pulldown resistor on interrupt pin
     pinMode(BluePin, OUTPUT);
@@ -92,12 +92,7 @@ void loop()
     while(Flipped == false)
     {
         GetAttitude();
-        Serial.print(Attitude[Pitch]);
-        Serial.print("\t");
-        Serial.println(Attitude[Roll]);
-        delay(300);
-       // Drive(DriveDelay, LeftSpeed, LeftDirection, RightSpeed, RightDirection);
-       // Stop();
+        Drive(DriveDelay, LeftSpeed, LeftDirection, RightSpeed, RightDirection);
     }
 }
 
