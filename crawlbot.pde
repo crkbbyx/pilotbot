@@ -41,7 +41,7 @@ int CalibrateZ;                 // Level value for Z-axis, set when powered on
 const boolean fwd = 1;          // Abstraction for forward
 const boolean bwd = 0;          // Abstraction for backward
 int LeftSpeed = 255;            // Speed for left wheels, starts at maximum
-boolean Leftdirection;    // Direction for left wheels, starts at forward
+boolean LeftDirection;    // Direction for left wheels, starts at forward
 int RightSpeed = 255;           // Speed for right wheels, starts at maximum
 boolean RightDirection;   // Direction for right wheels, starts at forward
 int DriveDelay = 10;            // Time in microseconds to carry out drive fxn, starts at 10us
@@ -87,14 +87,8 @@ void loop()
 // While Flipped is false, executes Drive fxn and Virtue fxns.
 	while(Flipped == false)
 	{
-		Drive(500, 100, fwd, 100, fwd);
-		Drive(500, 100, bwd, 100, bwd);
-		Drive(1000, 100, fwd, 100, bwd);
-		Drive(500, 100, bwd, 100, fwd);
+		Drive(DriveDelay, LeftSpeed, LeftDirection, RightSpeed, RightDirection);
 		Stop();
-		delay(2000);
-		// Drive(500, 255, bwd, 255, bwd);
-		// Drive(1000, 255, fwd, 255, bwd);
 	}
 }
 
