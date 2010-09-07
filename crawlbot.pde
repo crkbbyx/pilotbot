@@ -49,22 +49,22 @@ int DriveDelay = 10;            // Time in microseconds to carry out drive fxn, 
 
 void setup()
 {
-	pinMode(GoButton, INPUT);
-	digitalWrite(GoButton, HIGH);           // Enable pulldown resistor on interrupt pin
-	pinMode(BluePin, OUTPUT);
-	pinMode(GreenPin, OUTPUT);
-	pinMode(RedPin, OUTPUT);
-	pinMode(PwmA, OUTPUT);
-	pinMode(PwmB, OUTPUT);
-	pinMode(Stby, OUTPUT);
-	pinMode(Ain1, OUTPUT);
-	pinMode(Ain2, OUTPUT);
-	pinMode(Bin1, OUTPUT);
-	pinMode(Bin2, OUTPUT);
-	CalibratePitch = analogRead(PitchPin);  // Measures pitch at startup, assumed to be level 
-	CalibrateRoll = analogRead(RollPin);    // Measures roll at startup, assumed to be level
-	CalibrateZ = analogRead(ZPin);          // Measures Z-axis at startup, assumed to be gravity
-	attachInterrupt(0, go, FALLING);        // Attaches fxn "go" to the Go Button on pin 2
+    pinMode(GoButton, INPUT);
+    digitalWrite(GoButton, HIGH);           // Enable pulldown resistor on interrupt pin
+    pinMode(BluePin, OUTPUT);
+    pinMode(GreenPin, OUTPUT);
+    pinMode(RedPin, OUTPUT);
+    pinMode(PwmA, OUTPUT);
+    pinMode(PwmB, OUTPUT);
+    pinMode(Stby, OUTPUT);
+    pinMode(Ain1, OUTPUT);
+    pinMode(Ain2, OUTPUT);
+    pinMode(Bin1, OUTPUT);
+    pinMode(Bin2, OUTPUT);
+    CalibratePitch = analogRead(PitchPin);  // Measures pitch at startup, assumed to be level 
+    CalibrateRoll = analogRead(RollPin);    // Measures roll at startup, assumed to be level
+    CalibrateZ = analogRead(ZPin);          // Measures Z-axis at startup, assumed to be gravity
+    attachInterrupt(0, go, FALLING);        // Attaches fxn "go" to the Go Button on pin 2
 }
 
 void loop()
@@ -72,39 +72,39 @@ void loop()
 // Tuning Loop.
 // While Flipped is true, it stops the motors and scans Virtue1, Virtue2, and Virtue3 pots for values.
 // Also outputs tuning values to the RGB LED.  
-	while(Flipped == true)
-	{
-		analogWrite(RedPin, map(analogRead(Virtue1Pin), 1024,0,0,255));    // Reads, maps, and writes Virtue1 to the red LED
-		analogWrite(GreenPin, map(analogRead(Virtue2Pin), 1024,0,0,255));  // Reads, maps, and writes Virtue2 to the green LED
-		analogWrite(BluePin, map(analogRead(Virtue3Pin), 1024,0,0,255));   // Reads, maps, and writes Virtue3 to the blue LED
-		if(analogRead(ZPin) > 400)                                         // Checks to see if Go Tap received 
-		{
-			Flipped = false;                                               // If received, exits Tuning Loop
-		}
-	}
+    while(Flipped == true)
+    {
+        analogWrite(RedPin, map(analogRead(Virtue1Pin), 1024,0,0,255));    // Reads, maps, and writes Virtue1 to the red LED
+        analogWrite(GreenPin, map(analogRead(Virtue2Pin), 1024,0,0,255));  // Reads, maps, and writes Virtue2 to the green LED
+        analogWrite(BluePin, map(analogRead(Virtue3Pin), 1024,0,0,255));   // Reads, maps, and writes Virtue3 to the blue LED
+        if(analogRead(ZPin) > 400)                                         // Checks to see if Go Tap received 
+        {
+            Flipped = false;                                               // If received, exits Tuning Loop
+        }
+    }
 
 // Drive Loop.
 // While Flipped is false, executes Drive fxn and Virtue fxns.
-	while(Flipped == false)
-	{
-		Drive(DriveDelay, LeftSpeed, LeftDirection, RightSpeed, RightDirection);
-		Stop();
-	}
+    while(Flipped == false)
+    {
+        Drive(DriveDelay, LeftSpeed, LeftDirection, RightSpeed, RightDirection);
+        Stop();
+    }
 }
 
 // Go fxn atatched to interrupt. Toggles between Tuning and Drive loops.
 // Stops the motor and toggles the Flipped variable.
 void go()
 {
-	static unsigned long last_interrupt_time = 0;       // Debounce code
-	unsigned long interrupt_time = millis();            // debounce code
-	if (interrupt_time - last_interrupt_time > 200)     // Debounce code
-	{
-		if (Flipped == false)                           // Checks to see if already flipped
-		{
-			Stop();                                     // If not flipped, stops motors
-		}
-		Flipped = !Flipped;                             // Toggles flipped state
-	}
-	last_interrupt_time = interrupt_time;               // Debounce code
+    static unsigned long last_interrupt_time = 0;       // Debounce code
+    unsigned long interrupt_time = millis();            // debounce code
+    if (interrupt_time - last_interrupt_time > 200)     // Debounce code
+    {
+        if (Flipped == false)                           // Checks to see if already flipped
+        {
+            Stop();                                     // If not flipped, stops motors
+        }
+        Flipped = !Flipped;                             // Toggles flipped state
+    }
+    last_interrupt_time = interrupt_time;               // Debounce code
 }
