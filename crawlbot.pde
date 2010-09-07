@@ -16,7 +16,7 @@ const byte ZPin = 5;            // Analog pin reads Z axis (up and down)
 const byte Virtue1Pin = 1;      // Analog pin reads left pot
 const byte Virtue2Pin = 2;      // Analog pin reads center pot
 const byte Virtue3Pin = 3;      // Analog pin reads right pot
-const byte GoButton = 2;        // Go Button pin
+const byte GoButton = 2;        // Go Button pin, digital
 
 // Pin Mapping - LED
 const byte RedPin = 6;          // Pwm output for the red LED channel
@@ -30,12 +30,12 @@ const byte Zaxis = 2;           // Abstraction for Z-axis array address
 const byte Virtue1 = 0;         // Abstraction for Virtue 1 array address
 const byte Virtue2 = 1;         // Abstraction for Virtue 2 array address
 const byte Virtue3 = 2;         // Abstraction for Virtue 3 array address
-volatile boolean Flipped = true;// Toggles between the Drive loop and the Tune loop. Volatile due to use with interrupt
 int Attitude[3];                // Array that holds the X,Y, and Z readings processed by the getAttitude fxn
 int Virtues[3];                 // Array that holds the 3 pot values
 int CalibratePitch;             // Level value for pitch, set when powered on
 int CalibrateRoll;              // Level value for roll, set when powered on
 int CalibrateZ;                 // Level value for Z-axis, set when powered on
+volatile boolean Flipped = true;// Toggles between the Drive loop and the Tune loop. Volatile due to use with interrupt
 
 //Drive Variables
 const boolean fwd = 1;          // Abstraction for forward
