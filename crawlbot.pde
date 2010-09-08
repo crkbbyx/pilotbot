@@ -32,6 +32,10 @@ const byte Virtue2 = 1;         // Abstraction for Virtue 2 array address
 const byte Virtue3 = 2;         // Abstraction for Virtue 3 array address
 int Attitude[3];                // Array that holds the X,Y, and Z readings processed by the getAttitude fxn
 int Virtues[3];                 // Array that holds the 3 pot values
+boolean PitchDirection;         // Which direction, fwd or bwd?
+boolean RollDirection;          // Which direction, left or right?
+const byte Left = 0;            // Abstraction for roll direction
+const byte Right = 1;           // Abstrction for roll direction
 int CalibratePitch;             // Level value for pitch, set when powered on
 int CalibrateRoll;              // Level value for roll, set when powered on
 int CalibrateZ;                 // Level value for Z-axis, set when powered on
@@ -41,9 +45,9 @@ volatile boolean Flipped = true;// Toggles between the Drive loop and the Tune l
 const boolean fwd = 1;          // Abstraction for forward
 const boolean bwd = 0;          // Abstraction for backward
 int LeftSpeed = 255;            // Speed for left wheels, starts at maximum
-boolean LeftDirection = fwd;          // Direction for left wheels, starts at forward
+boolean LeftDirection = fwd;    // Direction for left wheels, starts at forward
 int RightSpeed = 255;           // Speed for right wheels, starts at maximum
-boolean RightDirection = fwd;         // Direction for right wheels, starts at forward
+boolean RightDirection = fwd;   // Direction for right wheels, starts at forward
 int DriveDelay = 10;            // Time in microseconds to carry out drive fxn, starts at 10us
 
 
@@ -81,7 +85,7 @@ void loop()
         Virtues[Virtue1] = map(analogRead(Virtue1Pin), 1024,0,0,1024);      // Writes pot to array.Inverts so left
         Virtues[Virtue2] = map(analogRead(Virtue2Pin), 1024,0,0,1024);      // Writes pot to array.Inverts so left
         Virtues[Virtue3] = map(analogRead(Virtue3Pin), 1024,0,0,1024);      // Writes pot to array.Inverts so left
-        
+
         if(analogRead(ZPin) > 400)                                          // Checks to see if Go Tap received 
         {
             Flipped = false;                                                // If received, exits Tuning Loop
@@ -92,7 +96,6 @@ void loop()
 // While Flipped is false, executes Drive fxn and Virtue fxns.
     while(Flipped == false)
     {
-        GetAttitude();
         Drive(DriveDelay, LeftSpeed, LeftDirection, RightSpeed, RightDirection);
         P1();
     }

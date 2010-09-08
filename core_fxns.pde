@@ -62,10 +62,49 @@ void Stop()
     digitalWrite(Stby, LOW);                                // Turns off motor driver
 }
 
+// ---------- GETATTITUDE FXN ----------
 void GetAttitude()
 {
-
     Attitude[Pitch] = analogRead(PitchPin);
     Attitude[Roll] = analogRead(RollPin);
     Attitude[Zaxis] = analogRead(ZPin);
+    
+    if (Attitude[Pitch] >= CalibratePitch)
+    {
+        Attitude[Pitch] = Attitude[Pitch] - CalibratePitch;
+        PitchDirection = bwd;
+    }
+    
+    else
+    {
+        Attitude[Pitch] = CalibratePitch - Attitude[Pitch];
+        PitchDirection = fwd;
+    }
+    
+    if (Attitude[Roll] >= CalibrateRoll)
+    {
+        Attitude[Roll] = Attitude[Roll] - CalibrateRoll;
+        RollDirection = Right;
+    }
+    
+    else
+    {
+        Attitude[Roll] = CalibrateRoll - Attitude[Roll];
+        RollDirection = Left;
+    }
+    
+    if(Attitude[Zaxis] > 330)
+    {
+        Flipped = true;
+    }
 }
+
+
+
+
+
+
+
+
+
+
