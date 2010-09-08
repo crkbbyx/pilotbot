@@ -65,46 +65,36 @@ void Stop()
 // ---------- GETATTITUDE FXN ----------
 void GetAttitude()
 {
-    Attitude[Pitch] = analogRead(PitchPin);
-    Attitude[Roll] = analogRead(RollPin);
-    Attitude[Zaxis] = analogRead(ZPin);
-    
-    if (Attitude[Pitch] >= CalibratePitch)
+    Attitude[Pitch] = analogRead(PitchPin);                     // Read the raw pitch value
+    Attitude[Roll] = analogRead(RollPin);                       // Read the raw roll value
+    Attitude[Zaxis] = analogRead(ZPin);                         // read the raw Z value
+
+    if (Attitude[Pitch] >= CalibratePitch)                      // Is pitch greater than or equal to level value?
     {
-        Attitude[Pitch] = Attitude[Pitch] - CalibratePitch;
-        PitchDirection = bwd;
+        Attitude[Pitch] = Attitude[Pitch] - CalibratePitch;     // Calculate degree from level
+        PitchDirection = bwd;                                   // Set backward flag
     }
-    
-    else
+
+    else                                                        // If pitch is less than level
     {
-        Attitude[Pitch] = CalibratePitch - Attitude[Pitch];
-        PitchDirection = fwd;
+        Attitude[Pitch] = CalibratePitch - Attitude[Pitch];     // Calculate degree from level
+        PitchDirection = fwd;                                   // Set forward flag
     }
-    
-    if (Attitude[Roll] >= CalibrateRoll)
+
+    if (Attitude[Roll] >= CalibrateRoll)                        // Is roll greater than or equal to level value?
     {
-        Attitude[Roll] = Attitude[Roll] - CalibrateRoll;
-        RollDirection = Right;
+        Attitude[Roll] = Attitude[Roll] - CalibrateRoll;        // Calculate degree from level
+        RollDirection = Right;                                  // Set right flag
     }
-    
-    else
+
+    else                                                        // If roll is less than level
     {
-        Attitude[Roll] = CalibrateRoll - Attitude[Roll];
-        RollDirection = Left;
+        Attitude[Roll] = CalibrateRoll - Attitude[Roll];        // Calculate degree from level
+        RollDirection = Left;                                   // Set left flag
     }
-    
-    if(Attitude[Zaxis] > 330)
+
+    if(Attitude[Zaxis] > 330)                                   // Has the truck been flipped?
     {
-        Flipped = true;
+        Flipped = true;                                         // If so, set flipped to true
     }
 }
-
-
-
-
-
-
-
-
-
-
