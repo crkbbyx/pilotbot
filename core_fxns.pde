@@ -65,8 +65,25 @@ void Stop()
 // ---------- GETATTITUDE FXN ----------
 void GetAttitude()
 {
-    Attitude[Pitch] = analogRead(PitchPin);                     // Read the raw pitch value
-    Attitude[Roll] = analogRead(RollPin);                       // Read the raw roll value
+    int samples = 90;
+    float val[samples - 1];
+    float valSum=0;
+
+    for (int i=0; i<= samples; i++)                             // Sample xPin
+    {
+    	val[i] = analogRead(PitchPin);
+    	valSum = (val[i]+valSum);
+    }
+    Attitude[Pitch] = (valSum / samples);                            // Average samples
+
+    valSum = 0;
+    for (int i=0; i<= samples; i++)                             // Sample yPin
+    {
+    	val[i] = analogRead(RollPin);
+    	valSum = (val[i]+valSum);
+    }
+    Attitude[Roll] =(valSum / samples);                              // Average samples
+    
     Attitude[Zaxis] = analogRead(ZPin);                         // read the raw Z value
 
     if (Attitude[Pitch] >= CalibratePitch)                      // Is pitch greater than or equal to level value?

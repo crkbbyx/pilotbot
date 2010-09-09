@@ -97,6 +97,7 @@ void loop()
     while(Flipped == false)
     {
         Drive(DriveDelay, LeftSpeed, LeftDirection, RightSpeed, RightDirection);
+        GetAttitude();
         P1();
     }
 }
