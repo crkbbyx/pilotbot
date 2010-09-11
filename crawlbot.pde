@@ -99,6 +99,7 @@ void loop()
         Drive(DriveDelay, LeftSpeed, LeftDirection, RightSpeed, RightDirection);
         GetAttitude();
         P1();
+        P2();
     }
 }
 
