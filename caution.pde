@@ -6,14 +6,23 @@ Reference - Drive(DriveDelay, LeftSpeed, LeftDirection, RightSpeed, RightDirecti
 void P1()
 {
     int cautionVal = map(Virtues[Virtue1], 0, 1024, 1, 10);
-    LeftSpeed = 255 - cautionVal * (Attitude[Roll] + (Attitude[Pitch]/2));
-
-    if(LeftSpeed < 30)
+    if(PitchDirection == bwd)
     {
-        LeftSpeed = 0;
-    }
+        LeftSpeed = 255 - cautionVal * (Attitude[Roll] + (Attitude[Pitch]/2));
 
-    RightSpeed = LeftSpeed;
+        if(LeftSpeed < 30)
+        {
+            LeftSpeed = 0;
+        }
+
+        RightSpeed = LeftSpeed;
+    }
+    
+    else if(PitchDirection == fwd)
+    {
+        RightSpeed = 255;
+        LeftSpeed = 255;
+    }
 
     if(LeftDirection == bwd && RightDirection == bwd)
     {
@@ -47,7 +56,7 @@ void P1()
     if((Attitude[Pitch] + Attitude[Roll])/2 > 35 - (cautionVal * 3))
     {
         Stop();
-        delay(100);
+        delay(200);
         GetAttitude();
 
         if((Attitude[Pitch] + Attitude[Roll])/2 > 35 - (cautionVal * 3))

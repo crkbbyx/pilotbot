@@ -66,8 +66,9 @@ void setup()
     pinMode(Ain2, OUTPUT);
     pinMode(Bin1, OUTPUT);
     pinMode(Bin2, OUTPUT);
-    CalibratePitch = analogRead(PitchPin);  // Measures pitch at startup, assumed to be level 
-    CalibrateRoll = analogRead(RollPin);    // Measures roll at startup, assumed to be level
+    GetAttitude();
+    CalibratePitch = Attitude[Pitch];  // Measures pitch at startup, assumed to be level 
+    CalibrateRoll = Attitude[Roll];    // Measures roll at startup, assumed to be level
     CalibrateZ = analogRead(ZPin);          // Measures Z-axis at startup, assumed to be gravity
     attachInterrupt(0, go, FALLING);        // Attaches fxn "go" to the Go Button on pin 2
 }
