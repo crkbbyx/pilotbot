@@ -79,6 +79,7 @@ void loop()
 // Also outputs tuning values to the RGB LED.  
     while(Flipped == true)
     {
+        Stop();                                                             // Stop the motors
         analogWrite(RedPin, map(analogRead(Virtue1Pin), 1024,0,0,255));     // Reads, maps, and writes Virtue1 to the red LED
         analogWrite(GreenPin, map(analogRead(Virtue2Pin), 1024,0,0,255));   // Reads, maps, and writes Virtue2 to the green LED
         analogWrite(BluePin, map(analogRead(Virtue3Pin), 1024,0,0,255));    // Reads, maps, and writes Virtue3 to the blue LED
@@ -100,6 +101,7 @@ void loop()
         GetAttitude();
         P1();
         P2();
+        P3();
     }
 }
 
@@ -116,6 +118,11 @@ void go()
             Stop();                                     // If not flipped, stops motors
         }
         Flipped = !Flipped;                             // Toggles flipped state
+        DriveDelay = 10;
+        LeftSpeed = 255;
+        RightSpeed = 255;
+        LeftDirection = fwd;
+        RightDirection = fwd;
     }
     last_interrupt_time = interrupt_time;               // Debounce code
 }
