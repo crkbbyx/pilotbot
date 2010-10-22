@@ -23,6 +23,9 @@ const byte RedPin = 6;          // Pwm output for the red LED channel
 const byte GreenPin = 5;        // Pwm output for the green LED channel
 const byte BluePin = 3;         // Pwm output for the blue LED channel
 
+// Pin Mapping - beacon
+const byte NorthPin = 11;       // Input for North beacon output
+
 // State Variables
 const byte Pitch = 0;           // Abstraction for Pitch array address
 const byte Roll = 1;            // Abstraction for Roll array address
