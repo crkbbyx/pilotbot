@@ -17,6 +17,7 @@ const byte virtue3Pin = 3;
 const byte Caution = 0;
 const byte Courage = 1;
 const byte Patience = 2;
+volatile boolean North = false;
 int Virtues[3];
 volatile int Attitude[3];
 volatile boolean Flipped;
@@ -34,7 +35,7 @@ int blueVal;
 
 void setup()
 {
-	// Serial.begin(9600);
+	Serial.begin(9600);
 	pinMode(2, INPUT);
 	digitalWrite(2, HIGH);
 	pinMode(4, OUTPUT);
@@ -42,7 +43,7 @@ void setup()
 	pinMode(6, OUTPUT);
 	pinMode(7, OUTPUT);
 	pinMode(10, OUTPUT);
-	pinMode(11, OUTPUT);
+	pinMode(11, INPUT);
 	Flipped = true;
 	punchIt = true;
 	xCal = analogRead(xPin);	// Calibrates x-axis 
